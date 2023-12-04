@@ -44,6 +44,7 @@ lint-check = [
 ]
 docs-serve = "mkdocs serve"
 docs-build = "mkdocs build"
+serve = "streamlit run chatbox/app.py"
 
 [build-system]
 requires = ["hatchling", "hatch-regex-commit"]
@@ -62,6 +63,10 @@ classifiers = [
 ]
 requires-python = ">=3.11"
 dependencies = [
+  "streamlit",
+  "langchain",
+  "python-dotenv",
+  "openai"
 ]
 
 [project.urls]
