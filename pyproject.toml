@@ -1,0 +1,69 @@
+[tool.ruff]
+target-version = "py311"
+extend-select = ["I", "TRY", "UP"]
+
+[tool.pytest.ini_options]
+addopts = "--cov=chatbox/ --cov-report=term-missing"
+asyncio_mode = "strict"
+
+[tool.hatch]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.version]
+source = "regex_commit"
+commit_extra_args = ["-e"]
+path = "chatbox/__init__.py"
+
+[tool.hatch.envs.default]
+python = "3.11"
+dependencies = [
+    "black",
+    "mypy",
+    "ruff",
+    "pytest",
+    "pytest-cov",
+    "mkdocs-material",
+    "mkdocstrings[python]",
+    "pytest-asyncio",
+]
+
+[tool.hatch.envs.default.scripts]
+test = "pytest"
+test-cov-xml = "pytest --cov-report=xml"
+lint = [
+  "black .",
+  "ruff --fix .",
+  "mypy chatbox/",
+]
+lint-check = [
+  "black --check .",
+  "ruff .",
+  "mypy chatbox/",
+]
+docs-serve = "mkdocs serve"
+docs-build = "mkdocs build"
+
+[build-system]
+requires = ["hatchling", "hatch-regex-commit"]
+build-backend = "hatchling.build"
+
+[project]
+name = "chatbox"
+authors = [
+  { name = "chatbox", email = "noahrschill@gmail.com" }
+]
+description = ""
+readme = "README.md"
+dynamic = ["version"]
+classifiers = [
+    "Programming Language :: Python :: 3 :: Only",
+]
+requires-python = ">=3.11"
+dependencies = [
+]
+
+[project.urls]
+Documentation = "https://nrsmac.github.io/chatbox/"
+Source = "https://github.com/nrsmac/chatbox"
